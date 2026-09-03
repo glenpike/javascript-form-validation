@@ -4,8 +4,9 @@
   "description": "A JavaScript validated web-form for DWP's coding test.",
   "main": "",
   "scripts": {
-    "start": "npx serve -l 3000 src",
-    "test": "playwright test"
+    "start": "npx serve -l 3000 ./src",
+    "test": "playwright test",
+    "lint": "html-validate src"
   },
   "author": "github@glenpike.co.uk",
   "license": "MIT",
