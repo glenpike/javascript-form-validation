@@ -1,4 +1,4 @@
-import { isPresent, validEmail, validDate, validUKPhoneNumber } from '../../src/utils/validators.mjs';
+import { isPresent, validEmail, validDate, validUKPhoneNumber, validNumber } from '../../src/utils/validators.mjs';
 
 import { test, expect } from '@playwright/test';
 
@@ -76,6 +76,69 @@ test.describe('validUKPhoneNumber', () => {
 
     test('returns false when the number is null', () => {
         expect(validUKPhoneNumber(null)).toEqual(false);
+    });
+});
+
+test.describe('validNumber', () => {
+    test('returns true for number', () => {
+        expect(validNumber(100)).toBe(true);
+    });
+
+    test('returns true for string numbers', () => {
+        expect(validNumber('100')).toBe(true);
+    });
+
+    test('returns false for invalid number strings', () => {
+        expect(validNumber('100x')).toBe(false);
+    });
+
+    test('returns false for an object', () => {
+        expect(validNumber({})).toBe(false);
+    });
+
+    test('returns false for null', () => {
+        expect(validNumber(null)).toBe(false);
+    });
+
+    test.describe('with min value', () => {
+        test('returns true when value is greater', () => {
+            expect(validNumber(100, { min: 50 })).toBe(true);
+        });
+
+        test('returns true when value is equal', () => {
+            expect(validNumber(100, { min: 100 })).toBe(true);
+        });
+
+
+        test('returns false when value is less', () => {
+            expect(validNumber(100, { min: 101 })).toBe(false);
+        });
+    });
+
+    test.describe('with max value', () => {
+        test('returns true when value is less', () => {
+            expect(validNumber(100, { max: 500 })).toBe(true);
+        });
+
+        test('returns true when value is equal', () => {
+            expect(validNumber(100, { max: 100 })).toBe(true);
+        });
+
+
+        test('returns false when value is greater', () => {
+            expect(validNumber(101, { max: 100 })).toBe(false);
+        });
+    });
+
+    test.describe('with min and max values', () => {
+        test('returns true when value is in the range', () => {
+            expect(validNumber(100, { min: 99, max: 101 })).toBe(true);
+        });
+
+
+        test('returns false when value is outside range', () => {
+            expect(validNumber(102, { min: 99, max: 101 })).toBe(false);
+        });
     });
 });
 

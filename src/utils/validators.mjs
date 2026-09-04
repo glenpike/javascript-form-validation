@@ -7,6 +7,23 @@ export const validEmail = (email) => emailRegexp.test(email);
 
 export const validDate = (date) => !Number.isNaN(Date.parse(date));
 
+export const validNumber = (value, { min = null, max = null } = {}) => {
+    if(!value) {
+        return false;
+    }
+    const number = +value;
+    if(Number.isNaN(number)) {
+        return false;
+    }
+    if(min && number < min) {
+        return false
+    }
+    if(max && number > max) {
+        return false
+    }
+    return true
+}
+
 // UK landlines start with 01, 02 for geographic locations; 03, 08, 09 for non-geographic; 05 is corporate
 // https://www.ofcom.org.uk/phones-and-broadband/phone-numbers/numbering-data
 export const validUKPhoneNumber = (tel) => {
