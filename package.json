@@ -6,13 +6,19 @@
   "scripts": {
     "start": "npx serve -l 3000 ./src",
     "test": "playwright test",
-    "lint": "html-validate src"
+    "lint:html": "html-validate src",
+    "lint:js": "eslint",
+    "lint": "lint:html && lint:js"
   },
   "author": "github@glenpike.co.uk",
   "license": "MIT",
   "devDependencies": {
     "@axe-core/playwright": "^4.13.0",
+    "@eslint/eslintrc": "^3.3.7",
+    "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.62.1",
+    "@stylistic/eslint-plugin": "^5.10.0",
+    "eslint": "^10.10.0",
     "html-validate": "^11.4.0",
     "playwright": "^1.62.1"
   }

@@ -1,16 +1,5 @@
 import { isPresent, validEmail, validDate, validUKPhoneNumber, validNumber } from './utils/validators.mjs';
 
-// When we validate, we want to check programmatically...
-
-// Check the 'name' field against presence
-
-// Check the email address for valid email addresses.
-
-
-// const checkField(el) {
-//     !!el && !!el.name && !!el.value
-// }
-
 export const validateNameField = (el) => {
     const errors = {};
     if(!isPresent(el.value)) {
