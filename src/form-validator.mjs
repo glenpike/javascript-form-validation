@@ -6,7 +6,7 @@ const toggleFieldError = (el, isValid) => {
 
 const setErrorMessage = (el, isValid, msg) => {
     toggleFieldError(el, isValid);
-    const errorMsg = el.closest('.form-input')?.querySelector('.errorMsg');
+    const errorMsg = el.closest('.form-input')?.querySelector('.error-msg');
     errorMsg.textContent = isValid ? '' : msg;
 }
 
