@@ -1,22 +1,25 @@
 <html lang="en">
     <head>
         <title>Simple form for personal details with JavaScript validation</title>
+        <script type="module" src="main.js"></script>
+    </head>
     </head>
     <body>
         <main>
             <h1>Please fill in your details below.</h1>
-            <p>Name, E-mail, Date of birth and Phone number</p>
             <form>
                 <div class="form-input">
                     <label for="fullName">What is your full name?</label>
                     <input id="fullName" type="text" name="fullName" spellcheck="false" autocomplete="name">
+                    <p class="errorMsg"></p>
                 </div>
                 <div class="form-input">
                     <label for="email">What is your email address?</label>
                     <input id="email" type="email" name="email" spellcheck="false" autocomplete="email">
+                    <p class="errorMsg"></p>
                     <p class="form-hint">We’ll only use this to send you a reply</p>
                 </div>
-                <fieldset class="form-input" aria-describedby="dobHint">
+                <fieldset class="form-input date-input" aria-describedby="dobHint">
                     <legend>
                         <h2>What is your date of birth?</h2>
                     </legend>
@@ -33,17 +36,19 @@
                         <label for="dobYear">Year</label>
                         <input id="dobYear" type="text" name="dobYear" inputmode="numeric">
                     </div>
+                    <p class="errorMsg"></p>
                 </fieldset>
                 <div class="form-input">
                     <label for="phoneNumber">What is your telephone number?</label>
                     <input id="phoneNumber" type="tel" name="phoneNumber" spellcheck="false" autocomplete="tel">
+                    <p class="errorMsg"></p>
                     <p class="form-hint">For example 07891234567 or +353 1 234 5678 </p>
                 </div>
                 <div class="form-input">
                     <button type="submit" name="submit">Send and check</button>
                 </div>
             </form>
-            <div class="results"></div>
+            <div id="output"></div>
         </main>
     </body>
 </html>

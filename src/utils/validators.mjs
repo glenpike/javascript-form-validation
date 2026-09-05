@@ -33,6 +33,7 @@ export const validUKPhoneNumber = (tel) => {
   const cleaned = tel.replace(/[\s\-\(\)]/g, '');
 
   const ukRegex = /^(?:(?:\+44|44|0044)?0?)7\d{9}$|^(?:(?:\+44|44|0044)?0?)[123589]\d{8,9}$/;
-
-  return ukRegex.test(cleaned);
+  const result = ukRegex.test(cleaned);
+  console.log(`validUKPhoneNumber ? ${cleaned} - ${result} (${tel})`)
+  return result;
 }
