@@ -120,5 +120,6 @@ export const initialise = (resultsCallbackFn) => {
         resultsCallbackFn(results);
         return false;
     });
+    //Add a listener to reset the invalid class on the field
+    //when someone starts typing in it.
 }
-
