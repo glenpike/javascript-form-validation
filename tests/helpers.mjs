@@ -5,13 +5,13 @@ export const defaultFields = {
     'Month': '09',
     'Year': '1996',
     'What is your UK telephone number?': '07891 234567'
-}
+};
 
 export const fillInForm = async (page, fields) => {
-    for(const field in fields) {
+    for (const field in fields) {
         const input = await page.getByLabel(field);
-        await input.fill(fields[field])
+        await input.fill(fields[field]);
     }
 
     await page.getByRole('button', { name: 'Send and check' }).click();
-}
+};

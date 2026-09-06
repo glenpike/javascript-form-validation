@@ -4,7 +4,7 @@ import { defaultFields, fillInForm } from './helpers.mjs';
 test.describe('an empty form', () => {
     test('Form has novalidate attriute set', async ({ page }) => {
         await page.goto('/');
-        const form = await page.getByRole('form')
+        const form = await page.getByRole('form');
 
         await expect(form).toHaveAttribute('novalidate');
     });
@@ -23,7 +23,7 @@ test.describe('an empty form', () => {
         await page.goto('/');
         await page.getByRole('button', { name: 'Send and check' }).click();
 
-        for(const field in defaultFields) {
+        for (const field in defaultFields) {
             const input = await page.getByLabel(field);
             await expect(input).toHaveClass('invalid');
         }
@@ -35,7 +35,7 @@ test.describe('an empty form', () => {
 
         const nameInput = await page.getByLabel('What is your full name?');
         await expect(nameInput).toHaveClass('invalid');
-        
+
         await nameInput.fill('Mr Bean');
         const emailInput = await page.getByLabel('What is your email address?');
         await emailInput.focus();
@@ -51,7 +51,7 @@ test.describe('a valid form', () => {
 
         await fillInForm(page, defaultFields);
 
-        for(const field in defaultFields) {
+        for (const field in defaultFields) {
             const input = await page.getByLabel(field);
             await expect(input).not.toHaveClass('invalid');
         }
@@ -62,7 +62,7 @@ test.describe('a valid form', () => {
 
         await fillInForm(page, defaultFields);
 
-        await expect(page.getByText('Please enter')).toHaveCount(0)
+        await expect(page.getByText('Please enter')).toHaveCount(0);
     });
 });
 
@@ -71,7 +71,7 @@ test.describe('a partially valid form', () => {
     test('Marks some fields as invalid', async ({ page }) => {
         await page.goto('/');
 
-        const partialFields = {...defaultFields, 'Month': '', 'What is your UK telephone number?': '0123' }
+        const partialFields = { ...defaultFields, 'Month': '', 'What is your UK telephone number?': '0123' };
         await fillInForm(page, partialFields);
 
         await expect(page.getByLabel('What is your full name?')).not.toHaveClass('invalid');
@@ -85,7 +85,7 @@ test.describe('a partially valid form', () => {
     test('Shows some error messages', async ({ page }) => {
         await page.goto('/');
 
-        const partialFields = {...defaultFields, 'Month': '', 'What is your UK telephone number?': '0123' }
+        const partialFields = { ...defaultFields, 'Month': '', 'What is your UK telephone number?': '0123' };
 
         await fillInForm(page, partialFields);
 
@@ -93,6 +93,6 @@ test.describe('a partially valid form', () => {
         await expect(page.getByText('Please enter a valid email address')).toHaveCount(0);
         await expect(page.getByText('Please enter a valid month in the past')).toBeVisible();
         await expect(page.getByText('Please enter a valid UK landline or mobile telephone number')).toBeVisible();
-        page.pause()
+        page.pause();
     });
 });

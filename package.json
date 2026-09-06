@@ -7,12 +7,17 @@
     "start": "npx serve -l 3000 ./src",
     "test": "playwright test",
     "lint:html": "html-validate src",
-    "lint:js": "eslint"
+    "lint:js": "eslint '**/*.mjs' 'src/**/*.js' 'tests/*'",
+    "lint:css": "eslint 'src/**/*.css'",
+    "lint": "npm run lint:html && npm run lint:js && npm run lint:css",
+    "js:obfuscate": "node scripts/rename-js.mjs hide",
+    "js:restore": "node scripts/rename-js.mjs restore"
   },
   "author": "github@glenpike.co.uk",
   "license": "MIT",
   "devDependencies": {
     "@axe-core/playwright": "^4.13.0",
+    "@eslint/css": "^2.0.0",
     "@eslint/eslintrc": "^3.3.7",
     "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.62.1",

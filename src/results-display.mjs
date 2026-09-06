@@ -7,7 +7,7 @@ const toggleResults = () => {
     const resultsDisplay = document.querySelector('.results-display');
     const visible = resultsDisplay.querySelectorAll(`.${resultsItemClass}`)?.length > 0;
     resultsDisplay.classList.toggle('results-display--hidden', !visible);
-}
+};
 
 export const displayResults = ({ formValid, results }) => {
     const { dobDay: day, dobMonth: month, dobYear: year } = results;
@@ -32,18 +32,18 @@ export const displayResults = ({ formValid, results }) => {
     resultsDisplay.prepend(resultItem);
 
     toggleResults();
-}
+};
 
 export const initialiseResults = () => {
     const resultsDisplay = document.querySelector(`.${resultsListClass}`);
-    
+
     resultsDisplay.addEventListener('click', (e) => {
-        if(e.target.innerText === buttonText) {
-            const item = e.target.closest(`.${resultsItemClass}`)
+        if (e.target.innerText === buttonText) {
+            const item = e.target.closest(`.${resultsItemClass}`);
             item.remove();
             toggleResults();
         }
     });
 
-    toggleResults()
-}
+    toggleResults();
+};

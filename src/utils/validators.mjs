@@ -8,32 +8,31 @@ export const validEmail = (email) => emailRegexp.test(email);
 export const validDate = (date) => !Number.isNaN(Date.parse(date));
 
 export const validNumber = (value, { min = null, max = null } = {}) => {
-    if(!value) {
+    if (!value) {
         return false;
     }
     const number = +value;
-    if(Number.isNaN(number)) {
+    if (Number.isNaN(number)) {
         return false;
     }
-    if(min && number < min) {
-        return false
+    if (min && number < min) {
+        return false;
     }
-    if(max && number > max) {
-        return false
+    if (max && number > max) {
+        return false;
     }
-    return true
-}
+    return true;
+};
 
 // UK landlines start with 01, 02 for geographic locations; 03, 08, 09 for non-geographic; 05 is corporate
 // https://www.ofcom.org.uk/phones-and-broadband/phone-numbers/numbering-data
 export const validUKPhoneNumber = (tel) => {
-  if(!tel) {
-    return false
-  }
-  const cleaned = tel.replace(/[\s\-\(\)]/g, '');
+    if (!tel) {
+        return false;
+    }
+    const cleaned = tel.replace(/[\s\-()]/g, '');
 
-  const ukRegex = /^(?:(?:\+44|44|0044)?0?)7\d{9}$|^(?:(?:\+44|44|0044)?0?)[123589]\d{8,9}$/;
-  const result = ukRegex.test(cleaned);
-  console.log(`validUKPhoneNumber ? ${cleaned} - ${result} (${tel})`)
-  return result;
-}
+    const ukRegex = /^(?:(?:\+44|44|0044)?0?)7\d{9}$|^(?:(?:\+44|44|0044)?0?)[123589]\d{8,9}$/;
+    const result = ukRegex.test(cleaned);
+    return result;
+};
