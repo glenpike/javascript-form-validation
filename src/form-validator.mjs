@@ -129,6 +129,8 @@ export const initialise = (resultsCallbackFn) => {
 
     form.noValidate = true;
 
+    let changeListenerAdded = false;
+
     form.addEventListener('submit', (e) => {
         e.preventDefault();
         const results = validateForm(form);
@@ -137,7 +139,10 @@ export const initialise = (resultsCallbackFn) => {
         formStatus.textContent = status;
         resultsCallbackFn(results);
 
-        form.addEventListener('change', changeHandler(form));
+        if (!changeListenerAdded) {
+            form.addEventListener('change', changeHandler(form));
+            changeListenerAdded = true;
+        }
         return false;
     });
 };
