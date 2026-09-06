@@ -2,6 +2,7 @@ import { defineConfig } from "eslint/config";
 import js from "@eslint/js";
 import stylistic from '@stylistic/eslint-plugin';
 import css from "@eslint/css";
+import compat from "eslint-plugin-compat";
 
 export default defineConfig([
 	{
@@ -29,5 +30,11 @@ export default defineConfig([
         language: "css/css",
         plugins: { css },
         extends: ["css/recommended"],
+    },
+    {
+        // Browser-support checking only makes sense for the code that
+        // actually ships to a browser, not the Node-side tooling/tests.
+        ...compat.configs["flat/recommended"],
+        files: ["src/**/*.js", "src/**/*.mjs"],
     },
 ]);

@@ -60,7 +60,7 @@ const validateDateOfBirthField = ({ elDay, elMonth, elYear }) => {
         fields.push('month');
         result = false;
     }
-    const maxYear = new Date().getFullYear(); // Yeah, we're assuming small children are prodigies
+    const maxYear = new Date().getFullYear(); // Assuming that we could be filling in for a child
     const minYear = maxYear - 150; // oldest person ever was 122
     const validYear = validNumber(elYear.value, { min: minYear, max: maxYear });
     if (!validYear) {
