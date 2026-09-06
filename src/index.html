@@ -9,18 +9,19 @@
 
 <body>
     <main>
-        <h1 id="formTitle">Please fill in your details to apply for service XX.</h1>
+        <h1 id="formTitle" tabindex="-1">Please fill in your details to apply for service XX.</h1>
+        <div id="form-status" role="status" class="status-announcement" data-testid="form-status"></div>
         <form aria-labelledby="formTitle">
             <div class="form-input">
                 <label for="fullName">What is your full name?</label>
-                <input id="fullName" type="text" name="fullName" spellcheck="false" autocomplete="name">
-                <p class="error-msg"></p>
+                <input id="fullName" type="text" name="fullName" spellcheck="false" autocomplete="name" aria-describedby="fullNameError">
+                <p class="error-msg" id="fullNameError"></p>
             </div>
             <div class="form-input">
                 <label for="email">What is your email address?</label>
-                <p class="form-hint">We’ll only use this to send you a reply.</p>
-                <input id="email" type="email" name="email" spellcheck="false" autocomplete="email">
-                <p class="error-msg"></p>
+                <p class="form-hint" id="emailHint">We’ll only use this to send you a reply.</p>
+                <input id="email" type="email" name="email" spellcheck="false" autocomplete="email" aria-describedby="emailHint emailError">
+                <p class="error-msg" id="emailError"></p>
             </div>
             <fieldset class="form-input dob-input" aria-describedby="dobHint">
                 <legend>
@@ -30,31 +31,32 @@
                 <div class="date-inputs">
                     <div class="date-input-group">
                         <label for="dobDay">Day</label>
-                        <input id="dobDay" type="text" name="dobDay" inputmode="numeric">
+                        <input id="dobDay" type="text" name="dobDay" inputmode="numeric" autocomplete="bday-day" aria-describedby="dobHint dobError">
                     </div>
                     <div class="date-input-group">
                         <label for="dobMonth">Month</label>
-                        <input id="dobMonth" type="text" name="dobMonth" inputmode="numeric">
+                        <input id="dobMonth" type="text" name="dobMonth" inputmode="numeric" autocomplete="bday-month" aria-describedby="dobError">
                     </div>
                     <div class="date-input-group">
                         <label for="dobYear">Year</label>
-                        <input id="dobYear" type="text" name="dobYear" inputmode="numeric">
+                        <input id="dobYear" type="text" name="dobYear" inputmode="numeric" autocomplete="bday-year" aria-describedby="dobHint dobError">
                     </div>
                 </div>
-                <p class="error-msg"></p>
+                <p class="error-msg" id="dobError"></p>
             </fieldset>
             <div class="form-input">
                 <label for="phoneNumber">What is your UK telephone number?</label>
-                <p class="form-hint">For example 07891234567 or +353 1 234 5678 </p>
-                <input id="phoneNumber" type="tel" name="phoneNumber" spellcheck="false" autocomplete="tel">
-                <p class="error-msg"></p>
+                <p class="form-hint" id="phoneHint">For example 07891234567 or +353 1 234 5678 </p>
+                <input id="phoneNumber" type="tel" name="phoneNumber" spellcheck="false" autocomplete="tel" aria-describedby="phoneHint phoneError">
+                <p class="error-msg" id="phoneError"></p>
             </div>
             <div class="form-input">
                 <button class="btn btn--save" type="submit" name="submit">Send and check</button>
             </div>
         </form>
+        <div id="result-status" role="status" class="status-announcement" data-testid="result-status"></div>
         <section class="results-display" data-testid="results-display">
-            <h1>Your previous form submissions</h1>
+            <h2>Your previous form submissions</h2>
             <p>Most recent submission is at the top.</p>
             <ul class="results-list">
             </ul>

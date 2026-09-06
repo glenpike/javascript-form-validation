@@ -31,6 +31,9 @@ export const displayResults = ({ formValid, results }) => {
     const resultsDisplay = document.querySelector(`.${resultsListClass}`);
     resultsDisplay.prepend(resultItem);
 
+    const resultStatus = document.getElementById('result-status');
+    resultStatus.textContent = 'Result added to the list.';
+
     toggleResults();
 };
 
@@ -40,7 +43,15 @@ export const initialiseResults = () => {
     resultsDisplay.addEventListener('click', (e) => {
         if (e.target.innerText === buttonText) {
             const item = e.target.closest(`.${resultsItemClass}`);
+            const next = item.nextElementSibling ?? item.previousElementSibling;
+            if (next) {
+                next.querySelector('button')?.focus();
+            } else {
+                document.getElementById('formTitle').focus();
+            }
             item.remove();
+            const resultStatus = document.getElementById('result-status');
+            resultStatus.textContent = 'Result removed from the list.';
             toggleResults();
         }
     });

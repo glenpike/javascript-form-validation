@@ -2,6 +2,7 @@ import { isPresent, validEmail, validDate, validUKPhoneNumber, validNumber } fro
 
 const toggleFieldError = (el, isValid) => {
     el.classList.toggle('invalid', !isValid);
+    el.setAttribute('aria-invalid', !isValid);
 };
 
 const setErrorMessage = (el, isValid, msg) => {
@@ -119,11 +120,19 @@ export const initialise = (resultsCallbackFn) => {
     form.addEventListener('submit', (e) => {
         e.preventDefault();
         const results = validateForm(form);
+        const formStatus = document.getElementById('form-status');
+        let status = '';
+        if (results.formValid) {
+            status = 'Form submitted successfully.';
+        } else {
+            status = `There are errors in the form. Please correct them and try again.`;
+        }
+        formStatus.textContent = status;
         resultsCallbackFn(results);
         return false;
     });
 
     form.addEventListener('change', (e) => {
-        toggleFieldError(e.target, true);
+        setErrorMessage(e.target, true, '');
     });
 };
