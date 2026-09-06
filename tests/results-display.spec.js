@@ -26,6 +26,13 @@ test.describe('Table and row visibility', () => {
         await expect(page.getByTestId('results-display')).toHaveClass(['results-display']);//.toBeVisible();
     });
 
+    test('Announces result status', async ({ page }) => {
+        await page.goto('/');
+        await page.getByRole('button', { name: 'Send and check' }).click();
+        const resultStatus = await page.getByTestId('result-status');
+        await expect(resultStatus).toHaveText('Result added to the list.');
+    });
+
     test('Shows multiple result rows', async ({ page }) => {
         await page.goto('/');
         await page.getByRole('button', { name: 'Send and check' }).click();
@@ -55,6 +62,28 @@ test.describe('Table and row visibility', () => {
         await page.getByRole('button', { name: 'Remove result' }).click();
 
         await expect(page.getByTestId('results-display')).toHaveClass(['results-display results-display--hidden']);//not.toBeVisible();
+    });
+
+    test('Announces result status when removing a result', async ({ page }) => {
+        await page.goto('/');
+        await page.getByRole('button', { name: 'Send and check' }).click();
+
+        await page.getByRole('button', { name: 'Remove result' }).click();
+
+        const resultStatus = await page.getByTestId('result-status');
+        await expect(resultStatus).toHaveText('Result removed from the list.');
+    });
+
+    test.skip('When one result is removed, the remaining result focussed', async ({ page }) => {
+        await page.goto('/');
+        await page.getByRole('button', { name: 'Send and check' }).click();
+        await page.getByRole('button', { name: 'Send and check' }).click();
+
+        const remainingButton = await page.getByRole('button', { name: 'Remove result' }).nth(1);
+        await page.getByRole('button', { name: 'Remove result' }).nth(0).click();
+   
+        expect(remainingButton).toBeFocused();
+
     });
 });
 

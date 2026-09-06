@@ -112,6 +112,18 @@ const validateForm = (form) => {
     return { formValid, results };
 };
 
+const changeHandler = (form) => (e) => {
+    if(/^dob(Day|Month|Year)$/.test(e.target.name)) {
+        validateDateOfBirthField({
+            elDay: form.querySelector('#dobDay'),
+            elMonth: form.querySelector('#dobMonth'),
+            elYear: form.querySelector('#dobYear')
+        });
+    } else {
+        setErrorMessage(e.target, true, '');
+    }
+};
+
 export const initialise = (resultsCallbackFn) => {
     const form = document.querySelector("form");
 
@@ -121,18 +133,11 @@ export const initialise = (resultsCallbackFn) => {
         e.preventDefault();
         const results = validateForm(form);
         const formStatus = document.getElementById('form-status');
-        let status = '';
-        if (results.formValid) {
-            status = 'Form submitted successfully.';
-        } else {
-            status = `There are errors in the form. Please correct them and try again.`;
-        }
+        const status = results.formValid ? 'Form submitted successfully.' : 'There are errors in the form. Please correct them and try again.';
         formStatus.textContent = status;
         resultsCallbackFn(results);
-        return false;
-    });
 
-    form.addEventListener('change', (e) => {
-        setErrorMessage(e.target, true, '');
+        form.addEventListener('change', changeHandler(form));
+        return false;
     });
 };

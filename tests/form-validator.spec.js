@@ -26,10 +26,11 @@ test.describe('an empty form', () => {
         for (const field in defaultFields) {
             const input = await page.getByLabel(field);
             await expect(input).toHaveClass('invalid');
+            await expect(input).toHaveAttribute('aria-invalid', 'true');
         }
     });
 
-    test('Fields have validity indicator removed when re-focussed', async ({ page }) => {
+    test('Fields have validity indicators removed when changed', async ({ page }) => {
         await page.goto('/');
         await page.getByRole('button', { name: 'Send and check' }).click();
 
@@ -41,6 +42,16 @@ test.describe('an empty form', () => {
         await emailInput.focus();
 
         await expect(nameInput).not.toHaveClass('invalid');
+        await expect(nameInput).toHaveAttribute('aria-invalid', 'false');
+        await expect(page.getByText('Please enter your full name')).toHaveCount(0);
+    });
+
+    test('Announces error messages', async ({ page }) => {
+        await page.goto('/');
+        await page.getByRole('button', { name: 'Send and check' }).click();
+
+        const formStatus = await page.getByTestId('form-status');
+        await expect(formStatus).toHaveText('There are errors in the form. Please correct them and try again.');
     });
 
 });
@@ -63,6 +74,15 @@ test.describe('a valid form', () => {
         await fillInForm(page, defaultFields);
 
         await expect(page.getByText('Please enter')).toHaveCount(0);
+    });
+
+    test('Announces successful submission', async ({ page }) => {
+        await page.goto('/');
+
+        await fillInForm(page, defaultFields);
+
+        const formStatus = await page.getByTestId('form-status');
+        await expect(formStatus).toHaveText('Form submitted successfully.');
     });
 });
 

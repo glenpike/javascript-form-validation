@@ -38,6 +38,11 @@ Lint: `npm run lint` does everything
 
 I used Playwright for testing - as a challenge to learn it a little more - and I am running unit and e2e tests.  Unit tests might normally be handled in some other software, but there's only a handful and Playwright's interface allows simple testing of these, so we don't need a whole other system to run those, so the choice was pragmatic.
 
+Missing tests 
+- focussing on an element when we remove one of the results.
+- validation handling on the D.O.B. fields after first submission.
+
+
 Also manually tested on 
 
 Mac OS:
