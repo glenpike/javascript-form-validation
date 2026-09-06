@@ -71,5 +71,6 @@ test.describe('a partially valid form', () => {
         await expect(page.getByText('Please enter a valid email address')).toHaveCount(0);
         await expect(page.getByText('Please enter a valid month in the past')).toBeVisible();
         await expect(page.getByText('Please enter a valid UK landline or mobile telephone number')).toBeVisible();
+        page.pause()
     });
 });

@@ -1,41 +1,46 @@
-const resultRowClass = 'result-row';
+const resultsListClass = 'results-list';
+const resultsItemClass = 'results-list__item';
+const buttonText = 'Remove result';
+
 
 const toggleResults = () => {
-    const table = document.querySelector('.results-table');
-    const visible = table.querySelectorAll('tbody tr')?.length > 0;
-    table.classList.toggle('results-table--hidden', !visible);
+    const resultsDisplay = document.querySelector('.results-display');
+    const visible = resultsDisplay.querySelectorAll(`.${resultsItemClass}`)?.length > 0;
+    resultsDisplay.classList.toggle('results-display--hidden', !visible);
 }
 
 export const displayResults = ({ formValid, results }) => {
     const { dobDay: day, dobMonth: month, dobYear: year } = results;
     const dob = `${day} ${month} ${year}`.trim();
 
-    const innerHTML = `<tr class="${resultRowClass}">
-            <td>'${results.fullName}'</td>
-            <td>'${results.email}'</td>
-            <td>'${dob}'</td>
-            <td>'${results.phoneNumber}'</td>
-            <td>${formValid ? 'Yes' : 'No'}</td>
-            <td><button class="btn btn--delete">Remove result</button></td>
-        </tr>`;
+    const innerHTML = `<li class="${resultsItemClass}">
+            <ul class="result-data" data-testid="result-data">
+                <li><span>Full name:</span><span data-testid="field-0">'${results.fullName}'</span></li>
+                <li><span>Email:</span><span data-testid="field-1">'${results.email}'</span></li>
+                <li><span>Date of Birth:</span><span data-testid="field-2">'${dob}'</span></li>
+                <li><span>Phone number:</span><span data-testid="field-3">'${results.phoneNumber}'</span></li>
+                <li><span>Valid form>?:</span><span data-testid="field-validity">${formValid ? 'Yes' : 'No'}</span></li>
+                <li><button class="btn btn--delete">${buttonText}</button></li>
+            </ul>
+        </li>`;
 
-    const container = document.createElement('tbody');
+    const container = document.createElement('ul');
     container.innerHTML = innerHTML;
-    const row = container.firstElementChild;
+    const resultItem = container.firstElementChild;
 
-    const tableBody = document.querySelector('.results-table tbody');
-    tableBody.appendChild(row);
+    const resultsDisplay = document.querySelector(`.${resultsListClass}`);
+    resultsDisplay.prepend(resultItem);
 
     toggleResults();
 }
 
 export const initialiseResults = () => {
-    const table = document.querySelector('.results-table');
+    const resultsDisplay = document.querySelector(`.${resultsListClass}`);
     
-    table.addEventListener('click', (e) => {
-        if(e.target.innerText === 'Remove result') {
-            const row = e.target.closest(`.${resultRowClass}`)
-            row.remove();
+    resultsDisplay.addEventListener('click', (e) => {
+        if(e.target.innerText === buttonText) {
+            const item = e.target.closest(`.${resultsItemClass}`)
+            item.remove();
             toggleResults();
         }
     });

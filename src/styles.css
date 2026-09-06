@@ -28,9 +28,9 @@ p, h1, h2, h3, h4, h5, h6 {
 p {
   text-wrap: pretty;
 }
-h1, h2, h3, h4, h5, h6 {
+/* h1, h2, h3, h4, h5, h6 {
   text-wrap: balance;
-}
+} */
 
 /* Variables */
 
@@ -39,6 +39,7 @@ h1, h2, h3, h4, h5, h6 {
   --dark-green: #008000;
   --white: #fff;
   --black: #000;
+  --grey: #aaa;
 }
 
 /* Styling */
@@ -47,7 +48,7 @@ body {
   font-family: Arial, sans-serif;
   font-size: 1rem;
   color: var(--black);
-  padding: 2rem 4rem;
+  padding: 0.5rem 1rem;
 }
 
 main {
@@ -68,6 +69,10 @@ main {
     padding-bottom: 0.25rem;
 }
 
+input {
+  width: 100%;
+}
+
 .invalid {
     border-color: var(--error-colour);
 }
@@ -81,10 +86,14 @@ main {
 }
 
 .btn {
-  font-size: 1.25rem;
-  border-width: 2px;
+  appearance: none;
+  -webkit-appearance: none;
+  border-style: solid;
+  border-color: var(--black);
   border-radius: 0.25rem;
-  padding: 0.5rem 1rem;
+  border-width: 2px;
+  font-size: 1rem;
+  padding: 0.25rem 1rem;
 }
 
 .btn--save {
@@ -124,10 +133,55 @@ main {
     width: 4rem;
 }
 
-.results-table {
-
+.results-display--hidden {
+  visibility: hidden;
 }
 
-.results-table--hidden {
-  visibility: hidden;
+.results-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.result-data {
+  border-bottom: 1px solid var(--grey);
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  margin: 0;
+  padding: 1rem 0;
+}
+
+.result-data li {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem 0 0;
+}
+
+.result-data li span {
+  width: 7rem;
+}
+
+@media (min-width: 600px) { 
+  body {
+    padding: 2rem 4rem;
+  }
+
+  input {
+    max-width: 24rem;
+  }
+
+  .results-list__item {
+    width: fit-content;
+  }
+
+  .result-data {
+    align-items: center;
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  .result-data li span {
+    width: auto;
+  }
 }

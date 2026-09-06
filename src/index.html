@@ -3,10 +3,11 @@
         <title>Simple form for personal details with JavaScript validation</title>
         <link rel="stylesheet" href="./styles.css">
         <script type="module" src="main.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
         <main>
-            <h1>Please fill in your details below.</h1>
+            <h1>Please fill in your details to apply for service XX.</h1>
             <form>
                 <div class="form-input">
                     <label for="fullName">What is your full name?</label>
@@ -15,9 +16,9 @@
                 </div>
                 <div class="form-input">
                     <label for="email">What is your email address?</label>
+                    <p class="form-hint">We’ll only use this to send you a reply.</p>
                     <input id="email" type="email" name="email" spellcheck="false" autocomplete="email">
                     <p class="error-msg"></p>
-                    <p class="form-hint">We’ll only use this to send you a reply.</p>
                 </div>
                 <fieldset class="form-input dob-input" aria-describedby="dobHint">
                     <legend>
@@ -42,30 +43,20 @@
                 </fieldset>
                 <div class="form-input">
                     <label for="phoneNumber">What is your UK telephone number?</label>
+                    <p class="form-hint">For example 07891234567 or +353 1 234 5678 </p>
                     <input id="phoneNumber" type="tel" name="phoneNumber" spellcheck="false" autocomplete="tel">
                     <p class="error-msg"></p>
-                    <p class="form-hint">For example 07891234567 or +353 1 234 5678 </p>
                 </div>
                 <div class="form-input">
                     <button class="btn btn--save" type="submit" name="submit">Send and check</button>
                 </div>
             </form>
-            <div id="output">
-                <table class="results-table" data-testid="results-table">
-                    <thead>
-                        <tr>
-                            <th>Full name</th>
-                            <th>Email</th>
-                            <th>Date of Birth</th>
-                            <th>Phone number</th>
-                            <th>Is form Valid?</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-            </div>
+            <section class="results-display" data-testid="results-display">
+                <h1>Your previous form submissions</h1>
+                <p>Most recent submission is at the top.</p>
+                <ul class="results-list">
+                </ul>
+            </section>
         </main>
     </body>
 </html>
