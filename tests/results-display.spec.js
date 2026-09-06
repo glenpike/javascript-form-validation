@@ -91,7 +91,7 @@ test.describe('a partially complete form', () => {
     test('Shows results', async ({ page }) => {
         await page.goto('/');
           
-        const partialFields = {...defaultFields, 'Month': '', 'What is your telephone number?': '0123' }
+        const partialFields = {...defaultFields, 'Month': '', 'What is your UK telephone number?': '0123' }
         await fillInForm(page, partialFields);
         
         const row = await page.getByRole('row').nth(1)

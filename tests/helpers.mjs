@@ -4,7 +4,7 @@ export const defaultFields = {
     'Day': '27',
     'Month': '09',
     'Year': '1996',
-    'What is your telephone number?': '07891 234567'
+    'What is your UK telephone number?': '07891 234567'
 }
 
 export const fillInForm = async (page, fields) => {

@@ -16,7 +16,7 @@ export const displayResults = ({ formValid, results }) => {
             <td>'${dob}'</td>
             <td>'${results.phoneNumber}'</td>
             <td>${formValid ? 'Yes' : 'No'}</td>
-            <td><button>Remove result</button></td>
+            <td><button class="btn btn--delete">Remove result</button></td>
         </tr>`;
 
     const container = document.createElement('tbody');

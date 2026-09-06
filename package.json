@@ -2,13 +2,12 @@
   "name": "dwp-test",
   "version": "1.0.0",
   "description": "A JavaScript validated web-form for DWP's coding test.",
-  "main": "",
+  "main": "src/main.js",
   "scripts": {
     "start": "npx serve -l 3000 ./src",
     "test": "playwright test",
     "lint:html": "html-validate src",
-    "lint:js": "eslint",
-    "lint": "lint:html && lint:js"
+    "lint:js": "eslint"
   },
   "author": "github@glenpike.co.uk",
   "license": "MIT",

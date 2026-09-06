@@ -8,8 +8,8 @@ test.describe('an empty form', () => {
 
         await expect(page.getByText('Please enter your full name')).toBeVisible();
         await expect(page.getByText('Please enter a valid email address')).toBeVisible();
-        await expect(page.getByText('Please enter a valid day & month & year')).toBeVisible();
-        await expect(page.getByText('Please enter a valid UK landline or mobile number')).toBeVisible();
+        await expect(page.getByText('Please enter a valid day & month & year in the past')).toBeVisible();
+        await expect(page.getByText('Please enter a valid UK landline or mobile telephone number')).toBeVisible();
     });
 
     test('Marks fields as invalid', async ({ page }) => {
@@ -49,7 +49,7 @@ test.describe('a partially valid form', () => {
     test('Marks some fields as invalid', async ({ page }) => {
         await page.goto('/');
 
-        const partialFields = {...defaultFields, 'Month': '', 'What is your telephone number?': '0123' }
+        const partialFields = {...defaultFields, 'Month': '', 'What is your UK telephone number?': '0123' }
         await fillInForm(page, partialFields);
 
         await expect(page.getByLabel('What is your full name?')).not.toHaveClass('invalid');
@@ -57,19 +57,19 @@ test.describe('a partially valid form', () => {
         await expect(page.getByLabel('Day')).not.toHaveClass('invalid');
         await expect(page.getByLabel('Year')).not.toHaveClass('invalid');
         await expect(page.getByLabel('Month')).toHaveClass('invalid');
-        await expect(page.getByLabel('What is your telephone number?')).toHaveClass('invalid');
+        await expect(page.getByLabel('What is your UK telephone number?')).toHaveClass('invalid');
     });
 
     test('Shows some error messages', async ({ page }) => {
         await page.goto('/');
 
-        const partialFields = {...defaultFields, 'Month': '', 'What is your telephone number?': '0123' }
+        const partialFields = {...defaultFields, 'Month': '', 'What is your UK telephone number?': '0123' }
 
         await fillInForm(page, partialFields);
 
         await expect(page.getByText('Please enter your full name')).toHaveCount(0);
         await expect(page.getByText('Please enter a valid email address')).toHaveCount(0);
-        await expect(page.getByText('Please enter a valid month')).toBeVisible();
-        await expect(page.getByText('Please enter a valid UK landline or mobile number')).toBeVisible();
+        await expect(page.getByText('Please enter a valid month in the past')).toBeVisible();
+        await expect(page.getByText('Please enter a valid UK landline or mobile telephone number')).toBeVisible();
     });
 });

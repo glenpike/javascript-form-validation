@@ -34,7 +34,7 @@ const validatePhoneNumberField = (el) => {
     let msg = '';
     let result = validUKPhoneNumber(el.value)
     if(!result) {
-        msg = 'Please enter a valid UK landline or mobile number'
+        msg = 'Please enter a valid UK landline or mobile telephone number'
     }
     setErrorMessage(el, result, msg);
     return result;
@@ -68,7 +68,7 @@ const validateDateOfBirthField = ({ elDay, elMonth, elYear }) => {
         result = false;
     }
     if(fields.length > 0) {
-        msg = `Please enter a valid ${fields.join(' & ')}`;
+        msg = `Please enter a valid ${fields.join(' & ')} in the past`;
     }
     
     setErrorMessage(elDay, result, msg);
