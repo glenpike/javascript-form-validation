@@ -114,12 +114,16 @@ const validateForm = (form) => {
 export const initialise = (resultsCallbackFn) => {
     const form = document.querySelector("form");
 
+    form.noValidate = true;
+
     form.addEventListener('submit', (e) => {
         e.preventDefault();
         const results = validateForm(form);
         resultsCallbackFn(results);
         return false;
     });
-    //Add a listener to reset the invalid class on the field
-    //when someone starts typing in it.
+
+    form.addEventListener('change', (e) => {
+        toggleFieldError(e.target, true)
+    });
 }

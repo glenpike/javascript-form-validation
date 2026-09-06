@@ -2,6 +2,13 @@ import { test, expect } from '@playwright/test';
 import { defaultFields, fillInForm } from './helpers.mjs';
 
 test.describe('an empty form', () => {
+    test('Form has novalidate attriute set', async ({ page }) => {
+        await page.goto('/');
+        const form = await page.getByRole('form')
+
+        await expect(form).toHaveAttribute('novalidate');
+    });
+
     test('Shows the error messages', async ({ page }) => {
         await page.goto('/');
         await page.getByRole('button', { name: 'Send and check' }).click();
@@ -21,6 +28,21 @@ test.describe('an empty form', () => {
             await expect(input).toHaveClass('invalid');
         }
     });
+
+    test('Fields have validity indicator removed when re-focussed', async ({ page }) => {
+        await page.goto('/');
+        await page.getByRole('button', { name: 'Send and check' }).click();
+
+        const nameInput = await page.getByLabel('What is your full name?');
+        await expect(nameInput).toHaveClass('invalid');
+        
+        await nameInput.fill('Mr Bean');
+        const emailInput = await page.getByLabel('What is your email address?');
+        await emailInput.focus();
+
+        await expect(nameInput).not.toHaveClass('invalid');
+    });
+
 });
 
 test.describe('a valid form', () => {
